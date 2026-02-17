@@ -128,8 +128,30 @@ func updateFunction() {
 	fmt.Println("Response during update", string(data), res.StatusCode)
 }
 
+func deleteFunction() {
+	myUrl := "https://jsonplaceholder.typicode.com/todos/2"
+
+	req, err := http.NewRequest(http.MethodDelete, myUrl, nil) //here nil because we dont need to upload any data, we need only want top delete
+	if err != nil {
+		fmt.Println(err, "erroe during req", err)
+
+	}
+	//Send the request
+	client := http.Client{}
+	res, err := client.Do(req)
+
+	if err != nil {
+		fmt.Println("error here in request", err)
+		return
+	}
+	defer res.Body.Close()
+	
+	fmt.Println("Response during delete", res.StatusCode)
+}
+
 func main() {
 	// readFunction()
 	// createFunction()
-	updateFunction()
+	// updateFunction()
+	deleteFunction()
 }
